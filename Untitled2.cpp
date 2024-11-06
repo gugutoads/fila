@@ -67,11 +67,22 @@ int dequeue (Queue* queue){
 }
 
 void push(Stack* stack, int dado){
-	
+	Processo* NovoProcesso = (Processo*)malloc(sizeof(Processo));
+    NovoProcesso->dado = dado;
+    NovoProcesso->prox = stack->topo;
+    stack->topo = NovoProcesso;
 }
 
 int pop(Stack* stack){
-	
+	    if (stack->topo == NULL) {
+        printf("Pilha vazia\n");
+        return -1;
+    }
+    Processo* ProcessoRemover = stack->topo;
+    int dado = ProcessoRemover->dado;
+    stack->topo = stack->topo->prox;
+    free(ProcessoRemover);
+    return dado;
 }
 
 int main(){
